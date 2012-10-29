@@ -1,49 +1,78 @@
 <!DOCTYPE html>
 <html ng-app>
 <head>
-    <link href="http://netdna.bootstrapcdn.com/bootswatch/2.1.0/spacelab/bootstrap.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="styles/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 </head>
 <body ng-init="generateRandomCode()">
 
 <div ng-controller="MastermindController">
     <div ng-init="generateRandomCode()"/>
-    <div class="hero-unit"><p>
+    <div class="hero-unit">
+        <div class="container">
+            <div class="row">
+                <div class="span12"><p>
 
-        <h3>Mastermind</h3></p><p><h6>Would you like to play a game?</h6></p></div>
-    <div ng-hide="solved"><p>Pick a color from each of the drop downs. Keep choosing different combinations until you
-        have solved which colors
-        belong in which slot.</p>
+                    <h1>Mastermind</h1></p><p><h6>Would you like to play a game?</h6></p></div>
+            </div>
+        </div>
     </div>
-    
-    <p>
-        <select name="color-selector" ng-model="color1Select" ng-selected="color1Selected()"
-                ng-options="color.id as color.name for color in colors">
-            <option value="">-- chose color --</option>
-        </select>
-        <input type="hidden" ng-model="color1HiddenSelected">
-        <select name="color-selector" ng-model="color2Select" ng-selected="color2Selected()"
-                ng-options="color.id as color.name for color in colors">
-            <option value="">-- chose color --</option>
-        </select>
-        <input type="hidden" ng-model="color2HiddenSelected">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div ng-hide="solved"><p class="text-info">Pick a color from each of the drop downs. Keep choosing
+                    different combinations
+                    until
+                    you
+                    have solved which colors
+                    belong in which slot.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <select name="color-selector" ng-model="color1Select" ng-selected="color1Selected()"
+                        ng-options="color.id as color.name for color in colors">
+                    <option value="">-- chose color --</option>
+                </select>
 
-        <select name="color-selector" ng-model="color3Select" ng-selected="color3Selected()"
-                ng-options="color.id as color.name for color in colors">
-            <option value="">-- chose color --</option>
-        </select>
-        <input type="hidden" ng-model="color3HiddenSelected">
+                <input type="hidden" ng-model="color1HiddenSelected">
+                <select name="color-selector" ng-model="color2Select" ng-selected="color2Selected()"
+                        ng-options="color.id as color.name for color in colors">
+                    <option value="">-- chose color --</option>
+                </select>
+                <input type="hidden" ng-model="color2HiddenSelected">
 
-        <select name="color-selector" ng-model="color4Select" ng-selected="color4Selected()"
-                ng-options="color.id as color.name for color in colors">
-            <option value="">-- chose color --</option>
-        </select>
-        <input type="hidden" ng-model="color4HiddenSelected">
-        <button ng-hide="solved" ng-click="placeGuess()">Make a Guess</button>
-    </p>
-    <div ng-show="solved"><p>
+                <select name="color-selector" ng-model="color3Select" ng-selected="color3Selected()"
+                        ng-options="color.id as color.name for color in colors">
+                    <option value="">-- chose color --</option>
+                </select>
+                <input type="hidden" ng-model="color3HiddenSelected">
 
-        <h3>Congratulations! You have solved the mystery. You are truly, a Mastermind.</h3></p></div>
+                <select name="color-selector" ng-model="color4Select" ng-selected="color4Selected()"
+                        ng-options="color.id as color.name for color in colors">
+                    <option value="">-- chose color --</option>
+                </select>
+                <input type="hidden" ng-model="color4HiddenSelected">
+                <button class="btn btn-large btn-info" ng-hide="solved" ng-click="placeGuess()">Make a Guess</button>
+                <button class="btn btn-large btn-danger" ng-click="startAgain()">Start Again</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div ng-show="solved"><p>
+
+                    <h3>Congratulations! You have solved the mystery. You are truly, a Mastermind.</h3></p></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span3 well">
     <span ng-show="color1HiddenSelected">
         <button class="btn btn-small {{color1HiddenSelected.btn}}">{{color1HiddenSelected.name}}</button>
     </span>
@@ -56,34 +85,62 @@
     <span ng-show="color4HiddenSelected">
         <button class="btn btn-small {{color4HiddenSelected.btn}}">{{color4HiddenSelected.name}}</button>
     </span>
-
+            </div>
+        </div>
+    </div>
     <p>&nbsp;</p>
-    <table class="table-striped" ng-show="numberOfGuesses > 0">
-        <thead>
-        <td width="15%"><h4>Column 1</h4></td>
-        <td width="15%"><h4>Column 2</h4></td>
-        <td width="15%"><h4>Column 3</h4></td>
-        <td width="15%"><h4>Column 4</h4></td>
-        <td width="20%"><h4>Correct color in correct space</h4></td>
-        <td width="20%"><h4>Correct color in wrong space</h4></td>
-        </thead>
-        <tr ng-repeat="guess in guesses">
-            <td>
-                <button class='btn btn-small {{guess.column1.btn}} disabled'>{{guess.column1.name}}</button>
-            </td>
-            <td>
-                <button class='btn btn-small {{guess.column2.btn}} disabled'>{{guess.column2.name}}</button>
-            </td>
-            <td>
-                <button class='btn btn-small {{guess.column3.btn}} disabled'>{{guess.column3.name}}</button>
-            </td>
-            <td>
-                <button class='btn btn-small {{guess.column4.btn}} disabled'> {{guess.column4.name}}</button>
-            </td>
-            <td>{{guess.numberOfBlacks}}</td>
-            <td>{{guess.numberOfWhites}}</td>
-        </tr>
-    </table>
+
+    <div class="container">
+        <div class="row">
+            <div class="span12 well">
+                <table class="table-striped" ng-show="numberOfGuesses > 0">
+                    <thead>
+                    <td width="10%"><h4>&nbsp;</h4></td>
+                    <td width="10%"><h4>Column 1</h4></td>
+                    <td width="10%"><h4>Column 2</h4></td>
+                    <td width="10%"><h4>Column 3</h4></td>
+                    <td width="10%"><h4>Column 4</h4></td>
+                    <td width="20%"><h4>Correct color in correct space</h4></td>
+                    <td width="20%"><h4>Correct color in wrong space</h4></td>
+                    </thead>
+                    <tr ng-repeat="guess in guesses">
+                        <td>Guess # {{guess.guessNumber+1}}</td>
+                        <td>
+                            <button class='btn btn-small {{guess.column1.btn}} disabled'>{{guess.column1.name}}</button>
+                        </td>
+                        <td>
+                            <button class='btn btn-small {{guess.column2.btn}} disabled'>{{guess.column2.name}}</button>
+                        </td>
+                        <td>
+                            <button class='btn btn-small {{guess.column3.btn}} disabled'>{{guess.column3.name}}</button>
+                        </td>
+                        <td>
+                            <button class='btn btn-small {{guess.column4.btn}} disabled'> {{guess.column4.name}}
+                            </button>
+                        </td>
+                        <td>{{guess.numberOfBlacks}}</td>
+                        <td>{{guess.numberOfWhites}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span12 well">
+                <div ng-hide="showAnswerVar"><p>
+                   <h4> I can't take it, what's the answer?</h4>
+                    <button class="btn btn-large btn-danger" ng-click="showAnswer()">Give Up</button></p>
+                </div>
+                <div ng-show="showAnswerVar"><h4>Answer: </h4>
+                    <button class="btn btn-small {{secretCode.column1.btn}}">{{secretCode.column1.name}}</button>
+                    <button class="btn btn-small {{secretCode.column2.btn}}">{{secretCode.column2.name}}</button>
+                    <button class="btn btn-small {{secretCode.column3.btn}}">{{secretCode.column3.name}}</button>
+                    <button class="btn btn-small {{secretCode.column4.btn}}">{{secretCode.column4.name}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </div>

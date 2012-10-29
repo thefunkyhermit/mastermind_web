@@ -37,9 +37,16 @@ function MastermindController($scope) {
             $scope.color4HiddenSelected = $scope.colors[$scope.color4Select];
         }
     }
+
+    $scope.startAgain = function () {
+        $scope.guesses = [];
+        $scope.showAnswerVar = false;
+        $scope.numberOfGuesses = 0;
+        $scope.solved = false;
+    }
     $scope.numberOfGuesses = 0;
     $scope.placeGuess = function () {
-        $scope.numberOfGuesses++;
+
         var numberOfBlacks = 0;
         var numberOfWhites = 0;
         var secretCode = $scope.secretCode;
@@ -73,11 +80,16 @@ function MastermindController($scope) {
             numberOfWhites++;
         }
 
-
-        $scope.guesses.push({column1:$scope.color1HiddenSelected, column2:$scope.color2HiddenSelected, column3:$scope.color3HiddenSelected, column4:$scope.color4HiddenSelected, numberOfWhites:numberOfWhites, numberOfBlacks:numberOfBlacks});
+        var guessNumber = $scope.numberOfGuesses++;
+        $scope.guesses.push({guessNumber:guessNumber, column1:$scope.color1HiddenSelected, column2:$scope.color2HiddenSelected, column3:$scope.color3HiddenSelected, column4:$scope.color4HiddenSelected, numberOfWhites:numberOfWhites, numberOfBlacks:numberOfBlacks});
         if (numberOfBlacks == 4) {
             $scope.solved = true;
+            $scope.showAnswerVar=true;
         }
+    }
+    $scope.showAnswerVar = false;
+    $scope.showAnswer = function () {
+        $scope.showAnswerVar = true;
     }
 
 }
