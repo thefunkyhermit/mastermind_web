@@ -72,7 +72,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="span3 well">
+            <div class="span3 well" ng-show="color1HiddenSelected">
     <span ng-show="color1HiddenSelected">
         <button class="btn btn-small {{color1HiddenSelected.btn}}">{{color1HiddenSelected.name}}</button>
     </span>
@@ -92,8 +92,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="span12 well">
-                <table class="table-striped" ng-show="numberOfGuesses > 0">
+            <div class="span12 well" ng-show="numberOfGuesses > 0">
+                <table class="table-striped">
                     <thead>
                     <td width="10%"><h4>&nbsp;</h4></td>
                     <td width="10%"><h4>Column 1</h4></td>
