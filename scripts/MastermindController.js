@@ -8,7 +8,7 @@ function MastermindController($scope) {
         {id:'2', name:'Green', btn:'btn-success'},
         {id:'3', name:'Black', btn:'btn-inverse'},
         {id:'4', name:'White', btn:''},
-        {id:'5', name:'Blue', btn:'btn-primary'}
+        {id:'5', name:'Blue', btn:'btn-info'}
     ];
     $scope.generateRandomCode = function () {
         var randomCode1 = Math.floor((Math.random() * 6));
